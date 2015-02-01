@@ -19,6 +19,7 @@ package com.android.systemui.qs.dagger.bianca
 import com.android.systemui.qs.tileimpl.QSTileImpl
 import com.android.systemui.qs.tiles.CaffeineTile
 import com.android.systemui.qs.tiles.DataSwitchTile
+import com.android.systemui.qs.tiles.UsbTetherTile
 import dagger.Binds
 import dagger.Module
 import dagger.multibindings.IntoMap
@@ -37,6 +38,11 @@ interface QSModuleBianca {
     @Binds
     @IntoMap
     @StringKey(DataSwitchTile.TILE_SPEC)
-    fun bindDataSwitchTile(dataSwitchTile: DataSwitchTile): QSTileImpl<*>
+    fun bindDataSwitchTile(dataswitchTile: DataSwitchTile): QSTileImpl<*>
 
+    /** Inject UsbTetherTile into tileMap in QSModule */
+    @Binds
+    @IntoMap
+    @StringKey(UsbTetherTile.TILE_SPEC)
+    fun bindUsbTetherTile(usbtetherTile: UsbTetherTile): QSTileImpl<*>
 }
