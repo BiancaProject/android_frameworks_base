@@ -134,6 +134,8 @@ import com.android.systemui.wallet.dagger.WalletModule;
 import com.android.systemui.wmshell.BubblesManager;
 import com.android.wm.shell.bubbles.Bubbles;
 
+import com.android.systemui.qs.dagger.bianca.QSModuleBianca;
+
 import dagger.Binds;
 import dagger.BindsOptionalOf;
 import dagger.Module;
@@ -214,7 +216,8 @@ import javax.inject.Named;
             UserModule.class,
             UtilModule.class,
             NoteTaskModule.class,
-            WalletModule.class
+            WalletModule.class,
+            QSModuleBianca.class
         },
         subcomponents = {
             CentralSurfacesComponent.class,
