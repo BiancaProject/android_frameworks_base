@@ -22,7 +22,9 @@ import android.content.Context;
 import android.content.om.IOverlayManager;
 import android.content.om.OverlayInfo;
 import android.content.Intent;
+import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
+import android.content.pm.PackageManager.NameNotFoundException;
 import android.content.res.Resources;
 import android.hardware.input.InputManager;
 import android.os.Handler;
@@ -304,6 +306,26 @@ public class BiancaUtils {
                 || BiancaUtils.isThemeEnabled("com.android.internal.systemui.navbar.gestural")
                 || BiancaUtils.isThemeEnabled("com.android.internal.systemui.navbar.gestural_wide_back")
                 || BiancaUtils.isThemeEnabled("com.android.internal.systemui.navbar.gestural_extra_wide_back");
+    }
+
+    // Check to see if a package is installed
+    public static boolean isPackageInstalled(Context context, String pkg, boolean ignoreState) {
+        if (pkg != null) {
+            try {
+                PackageInfo pi = context.getPackageManager().getPackageInfo(pkg, 0);
+                if (!pi.applicationInfo.enabled && !ignoreState) {
+                    return false;
+                }
+            } catch (NameNotFoundException e) {
+                return false;
+            }
+        }
+
+        return true;
+    }
+
+    public static boolean isPackageInstalled(Context context, String pkg) {
+        return isPackageInstalled(context, pkg, true);
     }
 
 }
