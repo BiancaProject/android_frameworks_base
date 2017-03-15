@@ -5772,6 +5772,12 @@ public final class Settings {
                 "torch_long_press_power_timeout";
 
         /**
+         * Whether to display 4G icon instead LTE
+         * @hide
+         */
+        public static final String SHOW_FOURG_ICON = "show_fourg_icon";
+
+        /**
          * The information of locale preference. This records user's preference to avoid
          * unsynchronized and existing locale preference in
          * {@link Locale#getDefault(Locale.Category)}.
