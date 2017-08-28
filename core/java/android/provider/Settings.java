@@ -5522,6 +5522,11 @@ public final class Settings {
         public static final String DESKTOP_MODE = "desktop_mode";
 
         /**
+         * @hide
+         */
+        public static final String GLOBAL_ACTIONS_LIST = "global_actions_list";
+
+        /**
          * Activate torchlight when power button is
          * long-pressed while the display is off
          * The value is boolean (1 or 0).
@@ -10423,6 +10428,11 @@ public final class Settings {
          */
         @Readable
         public static final String NOTIFICATION_DISMISS_RTL = "notification_dismiss_rtl";
+
+        /**
+         * @hide
+         */
+        public static final String ADVANCED_REBOOT = "advanced_reboot";
 
         /**
          * Comma separated list of QS tiles that have been auto-added already.
