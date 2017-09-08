@@ -69,4 +69,7 @@
     <string name="global_action_reboot_recovery">Recovery</string>
     <string name="global_action_reboot_bootloader">Bootloader</string>
     <string name="global_action_settings">Settings</string>
+
+    <!-- Statusbar tuner -->
+    <string name="statusbar_items_title">Statusbar icons</string>
 </resources>
