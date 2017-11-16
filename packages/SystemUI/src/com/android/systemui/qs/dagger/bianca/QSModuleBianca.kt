@@ -21,6 +21,7 @@ import com.android.systemui.qs.tiles.AutoBrightnessTile
 import com.android.systemui.qs.tiles.CaffeineTile
 import com.android.systemui.qs.tiles.DataSwitchTile
 import com.android.systemui.qs.tiles.HeadsUpTile
+import com.android.systemui.qs.tiles.RebootTile
 import com.android.systemui.qs.tiles.SyncTile
 import com.android.systemui.qs.tiles.UsbTetherTile
 import dagger.Binds
@@ -66,4 +67,10 @@ interface QSModuleBianca {
     @IntoMap
     @StringKey(AutoBrightnessTile.TILE_SPEC)
     fun bindAutoBrightnessTile(autobrightnessTile: AutoBrightnessTile): QSTileImpl<*>
+
+    /** Inject RebootTile into tileMap in QSModule */
+    @Binds
+    @IntoMap
+    @StringKey(RebootTile.TILE_SPEC)
+    fun bindRebootTile(rebootTile: RebootTile): QSTileImpl<*>
 }
