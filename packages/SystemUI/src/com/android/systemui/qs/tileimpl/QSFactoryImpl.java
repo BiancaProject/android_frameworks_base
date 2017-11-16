@@ -54,6 +54,7 @@ import com.android.systemui.qs.tiles.NightDisplayTile;
 import com.android.systemui.qs.tiles.OneHandedModeTile;
 import com.android.systemui.qs.tiles.QRCodeScannerTile;
 import com.android.systemui.qs.tiles.QuickAccessWalletTile;
+import com.android.systemui.qs.tiles.RebootTile;
 import com.android.systemui.qs.tiles.ReduceBrightColorsTile;
 import com.android.systemui.qs.tiles.RotationLockTile;
 import com.android.systemui.qs.tiles.ScreenRecordTile;
@@ -111,6 +112,7 @@ public class QSFactoryImpl implements QSFactory {
     private final Provider<HeadsUpTile> mHeadsUpTileProvider;
     private final Provider<SyncTile> mSyncTileProvider;
     private final Provider<AutoBrightnessTile> mAutoBrightnessTileProvider;
+    private final Provider<RebootTile> mRebootTileProvider;
 
     private final Lazy<QSHost> mQsHostLazy;
     private final Provider<CustomTile.Builder> mCustomTileBuilderProvider;
@@ -154,7 +156,8 @@ public class QSFactoryImpl implements QSFactory {
             Provider<DataSwitchTile> dataSwitchTileProvider,
             Provider<HeadsUpTile> headsUpTileProvider,
             Provider<SyncTile> syncTileProvider,
-            Provider<AutoBrightnessTile> autoBrightnessTileProvider) {
+            Provider<AutoBrightnessTile> autoBrightnessTileProvider,
+            Provider<RebootTile> rebootTileProvider) {
         mQsHostLazy = qsHostLazy;
         mCustomTileBuilderProvider = customTileBuilderProvider;
 
@@ -194,6 +197,7 @@ public class QSFactoryImpl implements QSFactory {
         mHeadsUpTileProvider = headsUpTileProvider;
         mSyncTileProvider = syncTileProvider;
         mAutoBrightnessTileProvider = autoBrightnessTileProvider;
+        mRebootTileProvider = rebootTileProvider;
     }
 
     /** Creates a tile with a type based on {@code tileSpec} */
@@ -282,6 +286,8 @@ public class QSFactoryImpl implements QSFactory {
                 return mSyncTileProvider.get();
             case "autobrightness":
                 return mAutoBrightnessTileProvider.get();
+            case "reboot":
+                return mRebootTileProvider.get();
         }
 
         // Custom tiles
