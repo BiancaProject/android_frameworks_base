@@ -107,4 +107,7 @@
     <string name="navigation_bar_inverse_title">Swap buttons</string>
     <string name="navigation_bar_inverse_summary">Swap the order of recents and back buttons</string>
 
+    <!-- VPN -->
+    <string name="status_bar_vpn">VPN</string>
+
 </resources>
