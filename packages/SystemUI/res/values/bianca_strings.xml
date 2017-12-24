@@ -25,4 +25,7 @@
     <!-- Biometric Dialog - Use Face -->
     <string name="biometric_dialog_button_use_face">Use Face</string>
 
+    <!-- CPUInfo tile -->
+    <string name="quick_settings_cpuinfo_label">CPU Info</string>
+
 </resources>
