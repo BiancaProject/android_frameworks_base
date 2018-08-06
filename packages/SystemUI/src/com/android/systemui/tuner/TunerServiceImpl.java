@@ -147,9 +147,6 @@ public class TunerServiceImpl extends TunerService {
                         TextUtils.join(",", iconHideList), mCurrentUser);
             }
         }
-        if (oldVersion < 2) {
-            setTunerEnabled(false);
-        }
         // 3 Removed because of a revert.
         if (oldVersion < 4) {
             // Delay this so that we can wait for everything to be registered first.
