@@ -5793,8 +5793,6 @@ public class WindowManagerService extends IWindowManager.Stub
 
     @Override
     public void setRecentsVisibility(boolean visible) {
-        mAtmInternal.enforceCallerIsRecentsOrHasPermission(android.Manifest.permission.STATUS_BAR,
-                "setRecentsVisibility()");
         synchronized (mGlobalLock) {
             mPolicy.setRecentsVisibilityLw(visible);
         }
@@ -5833,8 +5831,6 @@ public class WindowManagerService extends IWindowManager.Stub
 
     @Override
     public void hideTransientBars(int displayId) {
-        mAtmInternal.enforceCallerIsRecentsOrHasPermission(android.Manifest.permission.STATUS_BAR,
-                "hideTransientBars()");
         synchronized (mGlobalLock) {
             final DisplayContent displayContent = mRoot.getDisplayContent(displayId);
             if (displayContent != null) {
