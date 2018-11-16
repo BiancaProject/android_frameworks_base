@@ -101,4 +101,7 @@
     <string name="task_helper_app_killed">%1$s force stopped</string>
     <string name="empty_app_killed">App</string>
 
+    <!-- SystemUI tuner -->
+    <string name="systemui_tuner_navbar_title">Stock navbar</string>
+
 </resources>
