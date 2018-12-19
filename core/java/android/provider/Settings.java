@@ -11551,6 +11551,14 @@ public final class Settings {
         public static final String ADAPTIVE_CONNECTIVITY_ENABLED = "adaptive_connectivity_enabled";
 
         /**
+         * Whether volume panel should appear on the left (or right).
+         * 0 = false (on the right)
+         * 1 = true (on the left)
+         * @hide
+         */
+        public static final String VOLUME_PANEL_ON_LEFT = "volume_panel_on_left";
+
+        /**
          * Controls the 'Sunlight boost' toggle in wearable devices (high brightness mode).
          *
          * Valid values for this key are: '0' (disabled) or '1' (enabled).

@@ -70,6 +70,7 @@ import com.android.systemui.statusbar.policy.ConfigurationController;
 import com.android.systemui.statusbar.policy.DevicePostureController;
 import com.android.systemui.statusbar.policy.DeviceProvisionedController;
 import com.android.systemui.statusbar.policy.FakeConfigurationController;
+import com.android.systemui.tuner.TunerService;
 
 import org.junit.After;
 import org.junit.Before;
@@ -116,6 +117,7 @@ public class VolumeDialogImplTest extends SysuiTestCase {
     @Mock
     ActivityStarter mActivityStarter;
     @Mock
+    TunerService mTunerService;
     InteractionJankMonitor mInteractionJankMonitor;
     @Mock
     private DumpManager mDumpManager;
@@ -171,6 +173,7 @@ public class VolumeDialogImplTest extends SysuiTestCase {
                 mMediaOutputDialogFactory,
                 mVolumePanelFactory,
                 mActivityStarter,
+                mTunerService,
                 mInteractionJankMonitor,
                 false,
                 mCsdWarningDialogFactory,
