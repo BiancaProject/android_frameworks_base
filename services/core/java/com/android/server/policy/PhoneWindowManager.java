@@ -6332,13 +6332,13 @@ public class PhoneWindowManager implements WindowManagerPolicy {
                 BiancaUtils.toggleFlashLight();
                 break;
             case NavbarUtilities.KEY_ACTION_CLEAR_NOTIFICATIONS:
-                BiancaUtils.toggleClearNotifications();
+                BiancaUtils.clearAllNotifications();
                 break;
             case NavbarUtilities.KEY_ACTION_VOLUME_PANEL:
                 BiancaUtils.toggleVolumePanel(mContext);
                 break;
             case NavbarUtilities.KEY_ACTION_SCREEN_OFF:
-                BiancaUtils.toggleScreenOff(mContext);
+                BiancaUtils.switchScreenOff(mContext);
                 break;
             case NavbarUtilities.KEY_ACTION_NOTIFICATIONS:
                 BiancaUtils.toggleNotifications();
