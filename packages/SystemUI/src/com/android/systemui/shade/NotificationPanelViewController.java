@@ -726,6 +726,10 @@ public final class NotificationPanelViewController implements Dumpable {
                     step.getTransitionState() == TransitionState.RUNNING;
             };
 
+    private int mStatusBarHeaderHeight;
+
+    protected boolean mDoubleTapToSleepEnabled;
+
     @Inject
     public NotificationPanelViewController(NotificationPanelView view,
             @Main Handler handler,
@@ -1188,6 +1192,8 @@ public final class NotificationPanelViewController implements Dumpable {
                 R.dimen.dreaming_to_lockscreen_transition_lockscreen_translation_y);
         mOccludedToLockscreenTransitionTranslationY = mResources.getDimensionPixelSize(
                 R.dimen.occluded_to_lockscreen_transition_lockscreen_translation_y);
+        mStatusBarHeaderHeight = mResources.getDimensionPixelSize(
+                R.dimen.status_bar_height);
     }
 
     private void updateViewControllers(KeyguardStatusView keyguardStatusView,
@@ -5952,6 +5958,10 @@ public final class NotificationPanelViewController implements Dumpable {
         }
     }
 
+    public void updateDoubleTapToSleep(boolean doubleTapToSleepEnabled) {
+        mDoubleTapToSleepEnabled = doubleTapToSleepEnabled;
+    }
+
     /** Handles MotionEvents for the Shade. */
     public final class TouchHandler implements View.OnTouchListener {
         private long mLastTouchDownTime = -1L;
@@ -6128,6 +6138,14 @@ public final class NotificationPanelViewController implements Dumpable {
                     mView.getContext().getContentResolver(),
                     Settings.Secure.DOUBLE_TAP_TO_WAKE, 0, UserHandle.USER_CURRENT) == 1) {
                 mDoubleTapGestureListener.onTouchEvent(event);
+                } else if (!mQsExpanded
+                        && mDoubleTapToSleepEnabled
+                        && event.getY() < mStatusBarHeaderHeight) {
+                    mDoubleTapGestureListener.onTouchEvent(event);
+                    // quick pulldown can trigger those values
+                    // on double tap - so reset them
+                    mQsExpandImmediate = false;
+                    setListening(false);
             }
 
             // Make sure the next touch won't the blocked after the current ends.
@@ -6258,7 +6276,7 @@ public final class NotificationPanelViewController implements Dumpable {
                         onTrackingStarted();
                     }
                     if (isFullyCollapsed() && !mHeadsUpManager.hasPinnedHeadsUp()
-                            && !mCentralSurfaces.isBouncerShowing()) {
+                            && !mCentralSurfaces.isBouncerShowing() && !mDoubleTapToSleepEnabled) {
                         startOpening(event);
                     }
                     break;
