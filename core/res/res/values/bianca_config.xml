@@ -89,4 +89,7 @@
     <integer name="config_longPressOnCameraKeyBehavior">0</integer>
     <integer name="config_doubleTapOnCameraKeyBehavior">0</integer>
 
+    <!-- Navbar -->
+    <string name="config_navBarLayoutHandleArrows" translatable="false">back[1.7WC];home_handle;ime_switcher[1.7WC]</string>
+
 </resources>
