@@ -44,7 +44,6 @@ import com.android.systemui.statusbar.phone.MultiUserSwitchController;
 import com.android.systemui.statusbar.phone.SettingsButton;
 import com.android.systemui.statusbar.policy.DeviceProvisionedController;
 import com.android.systemui.statusbar.policy.UserInfoController;
-import com.android.systemui.tuner.TunerService;
 import com.android.systemui.util.ViewController;
 
 import javax.inject.Inject;
@@ -63,7 +62,6 @@ public class QSFooterViewController extends ViewController<QSFooterView> impleme
     private final UserTracker mUserTracker;
     private final QSPanelController mQsPanelController;
     private final QuickQSPanelController mQuickQSPanelController;
-    private final TunerService mTunerService;
     private final MetricsLogger mMetricsLogger;
     private final FalsingManager mFalsingManager;
     private final MultiUserSwitchController mMultiUserSwitchController;
@@ -105,25 +103,7 @@ public class QSFooterViewController extends ViewController<QSFooterView> impleme
                 mMetricsLogger.action(
                         mExpanded ? MetricsProto.MetricsEvent.ACTION_QS_EXPANDED_SETTINGS_LAUNCH
                                 : MetricsProto.MetricsEvent.ACTION_QS_COLLAPSED_SETTINGS_LAUNCH);
-                if (mSettingsButton.isTunerClick()) {
-                    mActivityStarter.postQSRunnableDismissingKeyguard(() -> {
-                        if (isTunerEnabled()) {
-                            mTunerService.showResetRequest(
-                                    () -> {
-                                        // Relaunch settings so that the tuner disappears.
-                                        startSettingsActivity();
-                                    });
-                        } else {
-                            Toast.makeText(getContext(), R.string.tuner_toast,
-                                    Toast.LENGTH_LONG).show();
-                            mTunerService.setTunerEnabled(true);
-                        }
-                        startSettingsActivity();
-
-                    });
-                } else {
-                    startSettingsActivity();
-                }
+                startSettingsActivity();
             } else if (v == mPowerMenuLite) {
                 mUiEventLogger.log(GlobalActionsDialogLite.GlobalActionsEvent.GA_OPEN_QS);
                 mGlobalActionsDialog.showOrHideDialog(false, true);
@@ -141,7 +121,7 @@ public class QSFooterViewController extends ViewController<QSFooterView> impleme
             QSPanelController qsPanelController,
             MultiUserSwitchController multiUserSwitchController,
             QuickQSPanelController quickQSPanelController,
-            TunerService tunerService, MetricsLogger metricsLogger, FalsingManager falsingManager,
+            MetricsLogger metricsLogger, FalsingManager falsingManager,
             @Named(PM_LITE_ENABLED) boolean showPMLiteButton,
             GlobalActionsDialogLite globalActionsDialog, UiEventLogger uiEventLogger) {
         super(view);
@@ -152,7 +132,6 @@ public class QSFooterViewController extends ViewController<QSFooterView> impleme
         mUserTracker = userTracker;
         mQsPanelController = qsPanelController;
         mQuickQSPanelController = quickQSPanelController;
-        mTunerService = tunerService;
         mMetricsLogger = metricsLogger;
         mFalsingManager = falsingManager;
         mMultiUserSwitchController = multiUserSwitchController;
@@ -210,7 +189,7 @@ public class QSFooterViewController extends ViewController<QSFooterView> impleme
         });
 
         mQsPanelController.setFooterPageIndicator(mPageIndicator);
-        mView.updateEverything(isTunerEnabled(), mMultiUserSwitchController.isMultiUserEnabled());
+        mView.updateEverything(mMultiUserSwitchController.isMultiUserEnabled());
     }
 
     @Override
@@ -227,7 +206,7 @@ public class QSFooterViewController extends ViewController<QSFooterView> impleme
     public void setExpanded(boolean expanded) {
         mExpanded = expanded;
         mView.setExpanded(
-                expanded, isTunerEnabled(), mMultiUserSwitchController.isMultiUserEnabled());
+                expanded, mMultiUserSwitchController.isMultiUserEnabled());
     }
 
     @Override
@@ -267,7 +246,7 @@ public class QSFooterViewController extends ViewController<QSFooterView> impleme
 
     @Override
     public void disable(int state1, int state2, boolean animate) {
-        mView.disable(state2, isTunerEnabled(), mMultiUserSwitchController.isMultiUserEnabled());
+        mView.disable(state2, mMultiUserSwitchController.isMultiUserEnabled());
     }
 
     private void startSettingsActivity() {
@@ -277,9 +256,5 @@ public class QSFooterViewController extends ViewController<QSFooterView> impleme
                         InteractionJankMonitor.CUJ_SHADE_APP_LAUNCH_FROM_SETTINGS_BUTTON) : null;
         mActivityStarter.startActivity(new Intent(android.provider.Settings.ACTION_SETTINGS),
                 true /* dismissShade */, animationController);
-    }
-
-    private boolean isTunerEnabled() {
-        return mTunerService.isTunerEnabled();
     }
 }

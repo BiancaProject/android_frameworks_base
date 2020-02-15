@@ -66,7 +66,7 @@ public abstract class TunerService {
     }
 
     /** */
-    public abstract void showResetRequest(Runnable onDisabled);
+    //public abstract void showResetRequest(Runnable onDisabled);
 
     public static boolean parseIntegerSwitch(String value, boolean defaultValue) {
         try {

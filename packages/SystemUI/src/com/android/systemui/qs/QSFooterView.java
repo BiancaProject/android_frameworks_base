@@ -73,8 +73,6 @@ public class QSFooterView extends FrameLayout {
     private TouchAnimator mSettingsCogAnimator;
 
     private View mActionsContainer;
-    private View mTunerIcon;
-    private int mTunerIconTranslation;
 
     private OnClickListener mExpandClickListener;
 
@@ -106,7 +104,6 @@ public class QSFooterView extends FrameLayout {
 
         mActionsContainer = requireViewById(R.id.qs_footer_actions_container);
         mBuildText = findViewById(R.id.build);
-        mTunerIcon = requireViewById(R.id.tuner_icon);
 
         // RenderThread is doing more harm than good when touching the header (to expand quick
         // settings), so disable it for this view
@@ -158,9 +155,6 @@ public class QSFooterView extends FrameLayout {
         MarginLayoutParams lp = (MarginLayoutParams) getLayoutParams();
         lp.bottomMargin = getResources().getDimensionPixelSize(R.dimen.qs_footers_margin_bottom);
         setLayoutParams(lp);
-        mTunerIconTranslation = mContext.getResources()
-                .getDimensionPixelOffset(R.dimen.qs_footer_tuner_icon_translation);
-        mTunerIcon.setTranslationX(isLayoutRtl() ? -mTunerIconTranslation : mTunerIconTranslation);
     }
 
     private void updateFooterAnimator() {
@@ -186,10 +180,10 @@ public class QSFooterView extends FrameLayout {
         mExpandClickListener = onClickListener;
     }
 
-    void setExpanded(boolean expanded, boolean isTunerEnabled, boolean multiUserEnabled) {
+    void setExpanded(boolean expanded, boolean multiUserEnabled) {
         if (mExpanded == expanded) return;
         mExpanded = expanded;
-        updateEverything(isTunerEnabled, multiUserEnabled);
+        updateEverything(multiUserEnabled);
     }
 
     /** */
@@ -242,16 +236,16 @@ public class QSFooterView extends FrameLayout {
         info.addAction(AccessibilityNodeInfo.AccessibilityAction.ACTION_EXPAND);
     }
 
-    void disable(int state2, boolean isTunerEnabled, boolean multiUserEnabled) {
+    void disable(int state2, boolean multiUserEnabled) {
         final boolean disabled = (state2 & DISABLE2_QUICK_SETTINGS) != 0;
         if (disabled == mQsDisabled) return;
         mQsDisabled = disabled;
-        updateEverything(isTunerEnabled, multiUserEnabled);
+        updateEverything(multiUserEnabled);
     }
 
-    void updateEverything(boolean isTunerEnabled, boolean multiUserEnabled) {
+    void updateEverything(boolean multiUserEnabled) {
         post(() -> {
-            updateVisibilities(isTunerEnabled, multiUserEnabled);
+            updateVisibilities(multiUserEnabled);
             updateClickabilities();
             setClickable(false);
         });
@@ -264,9 +258,8 @@ public class QSFooterView extends FrameLayout {
         mBuildText.setLongClickable(mBuildText.getVisibility() == View.VISIBLE);
     }
 
-    private void updateVisibilities(boolean isTunerEnabled, boolean multiUserEnabled) {
+    private void updateVisibilities(boolean multiUserEnabled) {
         mSettingsContainer.setVisibility(mQsDisabled ? View.GONE : View.VISIBLE);
-        mTunerIcon.setVisibility(isTunerEnabled ? View.VISIBLE : View.INVISIBLE);
         final boolean isDemo = UserManager.isDeviceInDemoMode(mContext);
         mMultiUserSwitch.setVisibility(
                 showUserSwitcher(multiUserEnabled) ? View.VISIBLE : View.GONE);

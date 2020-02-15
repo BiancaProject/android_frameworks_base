@@ -390,7 +390,7 @@ public class TunerServiceImpl extends TunerService {
                 mTunerComponent) == PackageManager.COMPONENT_ENABLED_STATE_ENABLED;
     }
 
-    @Override
+   /*@Override
     public void showResetRequest(Runnable onDisabled) {
         SystemUIDialog dialog = new SystemUIDialog(mContext);
         dialog.setShowForAllUsers(true);
@@ -411,7 +411,7 @@ public class TunerServiceImpl extends TunerService {
                     }
                 });
         dialog.show();
-    }
+    }*/
 
     private class Observer extends ContentObserver {
         public Observer() {
