@@ -97,4 +97,8 @@
     <string name="screen_pinning_toast_custom">To unpin this screen, touch &amp; hold Back button</string>
     <string name="screen_pinning_toast_recents_invisible_custom">To unpin this screen, touch &amp; hold Back button</string>
 
+    <!-- Kill app -->
+    <string name="task_helper_app_killed">%1$s force stopped</string>
+    <string name="empty_app_killed">App</string>
+
 </resources>
