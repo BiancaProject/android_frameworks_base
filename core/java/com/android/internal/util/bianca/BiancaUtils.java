@@ -298,4 +298,12 @@ public class BiancaUtils {
         }
     }
 
+    // Check if gesture navbar is enabled
+    public static boolean isGestureNavbar() {
+        return BiancaUtils.isThemeEnabled("com.android.internal.systemui.navbar.gestural_narrow_back")
+                || BiancaUtils.isThemeEnabled("com.android.internal.systemui.navbar.gestural")
+                || BiancaUtils.isThemeEnabled("com.android.internal.systemui.navbar.gestural_wide_back")
+                || BiancaUtils.isThemeEnabled("com.android.internal.systemui.navbar.gestural_extra_wide_back");
+    }
+
 }
