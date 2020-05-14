@@ -15,6 +15,7 @@
 package com.android.systemui.privacy
 
 import android.content.Context
+import android.provider.Settings
 import android.util.AttributeSet
 import android.view.ViewGroup
 import android.widget.FrameLayout

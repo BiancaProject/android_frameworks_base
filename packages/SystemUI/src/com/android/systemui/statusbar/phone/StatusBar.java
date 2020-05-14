@@ -2002,7 +2002,6 @@ public class StatusBar extends SystemUI implements DemoMode,
         if (!isExpanded) {
             mRemoteInputManager.onPanelCollapsed();
         }
-        ((StatusBarIconControllerImpl) mIconController).onPanelExpanded(isExpanded);
     }
 
     public ViewGroup getNotificationScrollLayout() {
