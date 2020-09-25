@@ -272,7 +272,6 @@ public class NotificationPanelViewController extends PanelViewController {
     private QS mQs;
     private FrameLayout mQsFrame;
     private KeyguardStatusView mKeyguardStatusView;
-    private View mQsNavbarScrim;
     private NotificationsQuickSettingsContainer mNotificationContainerParent;
     private NotificationStackScrollLayout mNotificationStackScroller;
     private boolean mAnimateNextPositionUpdate;
@@ -618,7 +617,6 @@ public class NotificationPanelViewController extends PanelViewController {
         mNotificationStackScroller.setOnEmptySpaceClickListener(mOnEmptySpaceClickListener);
         addTrackingHeadsUpListener(mNotificationStackScroller::setTrackingHeadsUp);
         mKeyguardBottomArea = mView.findViewById(R.id.keyguard_bottom_area);
-        mQsNavbarScrim = mView.findViewById(R.id.qs_navbar_scrim);
         mLastOrientation = mResources.getConfiguration().orientation;
 
         initBottomArea();
@@ -1706,9 +1704,6 @@ public class NotificationPanelViewController extends PanelViewController {
                         || mQsExpansionFromOverscroll));
         updateEmptyShadeView();
 
-        mQsNavbarScrim.setVisibility(
-                mBarState == StatusBarState.SHADE && mQsExpanded && !mStackScrollerOverscrolling
-                        && mQsScrimEnabled ? View.VISIBLE : View.INVISIBLE);
         if (mKeyguardUserSwitcher != null && mQsExpanded && !mStackScrollerOverscrolling) {
             mKeyguardUserSwitcher.hideIfNotSimple(true /* animate */);
         }
@@ -1732,10 +1727,6 @@ public class NotificationPanelViewController extends PanelViewController {
         if (mBarState == StatusBarState.SHADE_LOCKED || mBarState == StatusBarState.KEYGUARD) {
             updateKeyguardBottomAreaAlpha();
             updateBigClockAlpha();
-        }
-        if (mBarState == StatusBarState.SHADE && mQsExpanded && !mStackScrollerOverscrolling
-                && mQsScrimEnabled) {
-            mQsNavbarScrim.setAlpha(getQsExpansionFraction());
         }
 
         if (mAccessibilityManager.isEnabled()) {
