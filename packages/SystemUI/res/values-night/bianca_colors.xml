@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!--
-     Copyright 2020 ArrowOS
+     Copyright (C) 2022 DerpFest
      Copyright (C) 2023 BiancaProject
 
      Licensed under the Apache License, Version 2.0 (the "License");
@@ -16,14 +16,7 @@
      limitations under the License.
 -->
 <resources>
-    <!-- Pure Tuner Theme-->
-    <style name="ExTunerSettings" parent="@android:style/Theme.DeviceDefault.Settings">
-        <item name="preferenceTheme">@style/TunerPreferenceTheme</item>
-    </style>
 
     <!-- reTicker -->
-    <style name="TextAppearance.Notifications.reTicker" parent="@*android:style/TextAppearance.StatusBar.Icon">
-        <item name="android:textSize">14dp</item>
-        <item name="android:fontFamily">@*android:string/config_bodyFontFamily</item>
-    </style>
+    <color name="reticker_background_color">@android:color/system_neutral1_900</color>
 </resources>
