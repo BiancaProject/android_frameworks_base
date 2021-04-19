@@ -13,12 +13,11 @@
   ~ See the License for the specific language governing permissions and
   ~ limitations under the License.
   -->
-<LinearLayout
+<GridLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    android:orientation="vertical"
-    android:divider="@drawable/controls_list_divider"
-    android:showDividers="middle"
+    android:columnCount="2"
+    android:divider="@android:color/transparent"
 />
 
