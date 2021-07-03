@@ -1779,6 +1779,7 @@ public class NotificationPanelViewController extends PanelViewController {
         mQs.setQsExpansion(qsExpansionFraction, getHeaderTranslation());
         mMediaHierarchyManager.setQsExpansion(qsExpansionFraction);
         mNotificationStackScroller.setQsExpansionFraction(qsExpansionFraction);
+        mStatusBar.setQsExpansionFraction(qsExpansionFraction);
     }
 
     private String determineAccessibilityPaneTitle() {
