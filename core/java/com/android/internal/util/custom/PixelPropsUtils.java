@@ -16,6 +16,7 @@
 package com.android.internal.util.custom;
 
 import android.os.Build;
+import android.os.SystemProperties;
 import android.util.Log;
 
 import java.util.Arrays;
@@ -35,7 +36,6 @@ public class PixelPropsUtils {
             "com.google.android.as",
             "com.google.android.inputmethod.latin",
             "com.google.android.soundpicker",
-            "com.google.android.gms",
             "com.google.android.apps.wallpaper"
     };
 
@@ -85,8 +85,10 @@ public class PixelPropsUtils {
             }
         }
         // Set proper indexing fingerprint
-        if (packageName.equals("com.google.android.settings.intelligence")){
-            setPropValue("FINGERPRINT", Build.FINGERPRINT);
+        String stockFp = SystemProperties.get("ro.build.fingerprint");
+        if (packageName.equals("com.google.android.settings.intelligence") ||
+            packageName.equals("com.google.android.gms")) {
+            setPropValue("FINGERPRINT", stockFp);
         }
     }
 
