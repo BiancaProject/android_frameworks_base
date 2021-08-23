@@ -2023,6 +2023,13 @@ class ActivityStarter {
             final ActivityRecord top = targetTask.performClearTaskForReuseLocked(mStartActivity,
                     mLaunchFlags);
 
+            // The above code can remove {@code reusedActivity} from the task, leading to the
+            // {@code ActivityRecord} removing its reference to the {@code Task}. The task
+            // reference is needed in the call below to {@link setTargetStackAndMoveToFrontIfNeeded}
+            if (targetTaskTop.getTask() == null) {
+                targetTask.addChild(targetTaskTop);
+            }
+
             if (top != null) {
                 if (top.isRootOfTask()) {
                     // Activity aliases may mean we use different intents for the top activity,
@@ -2538,7 +2545,11 @@ class ActivityStarter {
 
     private void resumeTargetStackIfNeeded() {
         if (mDoResume) {
-            mRootWindowContainer.resumeFocusedStacksTopActivities(mTargetStack, null, mOptions);
+            if (mTargetStack.isFocusable()) {
+                mRootWindowContainer.resumeFocusedStacksTopActivities(mTargetStack, null, mOptions);
+            } else {
+                mRootWindowContainer.ensureActivitiesVisible(null, 0, !PRESERVE_WINDOWS);
+            }
         } else {
             ActivityOptions.abort(mOptions);
         }

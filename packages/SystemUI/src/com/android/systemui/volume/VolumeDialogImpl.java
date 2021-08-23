@@ -376,9 +376,9 @@ public class VolumeDialogImpl implements VolumeDialog,
         internalInsetsInfo.setTouchableInsets(InternalInsetsInfo.TOUCHABLE_INSETS_REGION);
         View main = mDialog.findViewById(R.id.main);
         int[] mainLocation = new int[2];
-        main.getLocationOnScreen(mainLocation);
+        main.getLocationInWindow(mainLocation);
         int[] dialogLocation = new int[2];
-        mDialogView.getLocationOnScreen(dialogLocation);
+        mDialogView.getLocationInWindow(dialogLocation);
         internalInsetsInfo.touchableRegion.set(new Region(
                 mainLocation[0],
                 dialogLocation[1],
@@ -411,8 +411,7 @@ public class VolumeDialogImpl implements VolumeDialog,
                 if (mVolumePanelOnLeft != volumePanelOnLeft) {
                     mVolumePanelOnLeft = volumePanelOnLeft;
                     mHandler.post(() -> {
-                        // Trigger panel rebuild on next show
-                        mConfigChanged = true;
+                        mControllerCallbackH.onConfigurationChanged();
                     });
                 }
             }
@@ -706,6 +705,7 @@ public class VolumeDialogImpl implements VolumeDialog,
     private void initODICaptionsH() {
         if (mODICaptionsIcon != null) {
             mODICaptionsIcon.setOnConfirmedTapListener(() -> {
+                rescheduleTimeoutH();
                 onCaptionIconClicked();
                 Events.writeEvent(Events.EVENT_ODI_CAPTIONS_CLICK);
             }, mHandler);
@@ -987,6 +987,8 @@ public class VolumeDialogImpl implements VolumeDialog,
                     mAllyStream = -1;
                     mMusicHidden = false;
                     tryToRemoveCaptionsTooltip();
+                    mDialog.getViewTreeObserver().removeOnComputeInternalInsetsListener(
+                            mInsetsListener);
                     mController.notifyVisible(false);
                 }, 50));
         if (!isLandscape() || !mShowActiveStreamOnly) animator.translationX(getAnimatorX());
@@ -1175,7 +1177,7 @@ public class VolumeDialogImpl implements VolumeDialog,
 
     protected void onStateChangedH(State state) {
         if (D.BUG) Log.d(TAG, "onStateChangedH() state: " + state.toString());
-        if (mState != null && state != null
+        if (mShowing && mState != null && state != null
                 && mState.ringerModeInternal != -1
                 && mState.ringerModeInternal != state.ringerModeInternal
                 && state.ringerModeInternal == AudioManager.RINGER_MODE_VIBRATE) {

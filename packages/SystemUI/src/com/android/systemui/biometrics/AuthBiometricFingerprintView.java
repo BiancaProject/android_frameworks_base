@@ -22,6 +22,7 @@ import android.graphics.drawable.AnimatedVectorDrawable;
 import android.graphics.drawable.Drawable;
 import android.util.AttributeSet;
 import android.util.Log;
+import android.view.View;
 
 import com.android.systemui.R;
 
@@ -76,9 +77,21 @@ public class AuthBiometricFingerprintView extends AuthBiometricView {
         showTouchSensorString();
     }
 
+    @Override
+    void onFinishInflateInternal() {
+        super.onFinishInflateInternal();
+        if (mHasFod) {
+            mIconView.setVisibility(View.INVISIBLE);
+            mIconView.setPadding(0, 0, 0, 0);
+            // Add IndicatorView above the biometric icon
+            removeView(mIndicatorView);
+            addView(mIndicatorView, indexOfChild(mIconView));
+        }
+    }
+
     private void showTouchSensorString() {
         mIndicatorView.setText(R.string.fingerprint_dialog_touch_sensor);
-        mIndicatorView.setTextColor(R.color.biometric_dialog_gray);
+        mIndicatorView.setTextColor(mTextColorHint);
     }
 
     private void updateIcon(int lastState, int newState) {
