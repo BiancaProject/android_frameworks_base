@@ -151,7 +151,11 @@ public class RecordingService extends Service implements MediaRecorder.OnInfoLis
         UserHandle currentUser = new UserHandle(mCurrentUserId);
         switch (action) {
             case ACTION_START:
-                doStartRecording(intent.getIntExtra(EXTRA_AUDIO_SOURCE, 0), intent.getBooleanExtra(EXTRA_SHOW_TAPS, false));
+                doStartRecording(
+                    intent.getIntExtra(EXTRA_AUDIO_SOURCE, 0),
+                    intent.getBooleanExtra(EXTRA_SHOW_TAPS, false),
+                    intent.getBooleanExtra(EXTRA_SHOW_STOP_DOT, false),
+                    intent.getBooleanExtra(EXTRA_LOW_QUALITY, false));
                 break;
 
             case ACTION_STOP_NOTIF:
@@ -212,18 +216,21 @@ public class RecordingService extends Service implements MediaRecorder.OnInfoLis
         return Service.START_STICKY;
     }
 
-    protected void doStartRecording(int audioSource, boolean showTaps) {
+    protected void doStartRecording(int audioSource, boolean showTaps, boolean showStopDot, boolean lowQuality) {
         int mCurrentUserId = mUserContextTracker.getCurrentUserContext().getUserId();
         mAudioSource = ScreenRecordingAudioSource
                 .values()[audioSource];
         Log.d(TAG, "recording with audio source" + mAudioSource);
         mShowTaps = showTaps;
+        mShowStopDot = showStopDot;
+        mLowQuality = lowQuality;
 
         mOriginalShowTaps = Settings.System.getInt(
                 getApplicationContext().getContentResolver(),
                 Settings.System.SHOW_TOUCHES, 0) != 0;
 
         setTapsVisible(mShowTaps);
+        setStopDotVisible(mShowStopDot);
 
         mRecorder = new ScreenMediaRecorder(
                 mUserContextTracker.getCurrentUserContext(),
@@ -231,6 +238,7 @@ public class RecordingService extends Service implements MediaRecorder.OnInfoLis
                 mAudioSource,
                 this
         );
+        setLowQuality(mLowQuality);
         startRecording();
     }
 
@@ -551,8 +559,8 @@ public class RecordingService extends Service implements MediaRecorder.OnInfoLis
         private ArrayList<IRecordingCallback> mCallbackList = new ArrayList<>();
 
         @Override
-        public void startRecording(int audioSource, boolean showTaps) throws RemoteException {
-            doStartRecording(audioSource, showTaps);
+        public void startRecording(int audioSource, boolean showTaps, boolean showStopDot, boolean lowQuality) throws RemoteException {
+            doStartRecording(audioSource, showTaps, showStopDot, lowQuality);
         }
 
         @Override
