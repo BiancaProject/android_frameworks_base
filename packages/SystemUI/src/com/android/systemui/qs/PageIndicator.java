@@ -78,10 +78,8 @@ public class PageIndicator extends ViewGroup {
     };
 
     private Runnable showAlpha = () -> {
-        boolean show = Settings.System.getInt(mContext.getContentResolver(),
-              Settings.System.QS_FOOTER_PAGE_INDICATOR, 1) != 0;
         TransitionManager.beginDelayedTransition((ViewGroup) this, alphaSet);
-        setVisibility((show ? View.VISIBLE : View.GONE));
+        setVisibility(View.VISIBLE);
         updateAlpha();
     };
 
