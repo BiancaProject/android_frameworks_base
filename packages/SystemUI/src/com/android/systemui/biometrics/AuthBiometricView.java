@@ -638,33 +638,10 @@ public abstract class AuthBiometricView extends LinearLayout {
         });
 
         if (this instanceof AuthBiometricFingerprintView) {
-            if (!Utils.canAuthenticateWithFace(mContext, mUserId)){
+            if (!Utils.canAuthenticateWithFace(mContext, mUserId)) {
                 mUseFaceButton.setVisibility(View.GONE);
             }
-            if (mHasFod) {
-                boolean isGesturalNav = Integer.parseInt(Settings.Secure.getStringForUser(
-                        mContext.getContentResolver(), Settings.Secure.NAVIGATION_MODE,
-                        UserHandle.USER_CURRENT)) == NAV_BAR_MODE_GESTURAL;
-                final int navbarHeight = getResources().getDimensionPixelSize(
-                        com.android.internal.R.dimen.navigation_bar_height);
-                final int fodMargin = getResources().getDimensionPixelSize(
-                        R.dimen.biometric_dialog_fod_margin);
-
-                mIconView.setVisibility(View.INVISIBLE);
-                // The view is invisible, so it still takes space and
-                // we use that to adjust for the FOD
-
-                mIconView.setPadding(0, 0, 0, isGesturalNav ? fodMargin : (fodMargin > navbarHeight)
-                    ? (fodMargin - navbarHeight) : 0);
-
-                // Add IndicatorView above the biometric icon
-                this.removeView(mIndicatorView);
-                this.addView(mIndicatorView, this.indexOfChild(mIconView));
-            } else {
-                mIconView.setVisibility(View.VISIBLE);
-            }
         } else if (this instanceof AuthBiometricFaceView) {
-            mIconView.setVisibility(View.VISIBLE);
             mUseFaceButton.setVisibility(View.GONE);
         }
     }
