@@ -17,6 +17,9 @@
 
 package com.android.internal.util.bianca;
 
+import static android.view.DisplayCutout.BOUNDS_POSITION_LEFT;
+import static android.view.DisplayCutout.BOUNDS_POSITION_RIGHT;
+
 import android.Manifest;
 import android.content.Context;
 import android.content.res.Resources;
@@ -24,6 +27,8 @@ import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.content.pm.PackageManager.NameNotFoundException;
 import android.hardware.fingerprint.FingerprintManager;
+import android.graphics.Point;
+import android.graphics.Rect;
 import android.os.PowerManager;
 import android.os.RemoteException;
 import android.os.ServiceManager;
@@ -34,6 +39,9 @@ import android.net.Network;
 import android.net.NetworkCapabilities;
 import android.net.NetworkInfo;
 import android.util.DisplayMetrics;
+import android.util.Log;
+import android.view.DisplayCutout;
+import android.view.DisplayInfo;
 import com.android.internal.R;
 
 import java.util.List;
@@ -45,6 +53,12 @@ import com.android.internal.statusbar.IStatusBarService;
  * @hide
  */
 public class biancaUtils {
+    private static final String TAG = "biancaUtils";
+
+    private static final boolean DEBUG = false;
+
+    private static final int NO_CUTOUT = -1;
+
     public static boolean isPackageInstalled(Context context, String pkg, boolean ignoreState) {
         if (pkg != null) {
             try {
@@ -157,5 +171,32 @@ public class biancaUtils {
         boolean maskDisplayCutout = context.getResources().getBoolean(R.bool.config_maskMainBuiltInDisplayCutout);
         boolean displayCutoutExists = (!TextUtils.isEmpty(displayCutout) && !maskDisplayCutout);
         return displayCutoutExists;
+    }
+
+    public static int getCutoutType(Context context) {
+        final DisplayInfo info = new DisplayInfo();
+        context.getDisplay().getDisplayInfo(info);
+        final DisplayCutout cutout = info.displayCutout;
+        if (cutout == null) {
+            if (DEBUG) Log.v(TAG, "noCutout");
+            return NO_CUTOUT;
+        }
+        final Point displaySize = new Point();
+        context.getDisplay().getRealSize(displaySize);
+        List<Rect> cutOutBounds = cutout.getBoundingRects();
+        if (cutOutBounds != null) {
+            for (Rect cutOutRect : cutOutBounds) {
+                if (DEBUG) Log.v(TAG, "cutout left= " + cutOutRect.left);
+                if (DEBUG) Log.v(TAG, "cutout right= " + cutOutRect.right);
+                if (cutOutRect.left == 0 && cutOutRect.right > 0) {  //cutout is located on top left
+                    if (DEBUG) Log.v(TAG, "cutout position= " + BOUNDS_POSITION_LEFT);
+                    return BOUNDS_POSITION_LEFT;
+                } else if (cutOutRect.right == displaySize.x && (displaySize.x - cutOutRect.left) > 0) {  //cutout is located on top right
+                    if (DEBUG) Log.v(TAG, "cutout position= " + BOUNDS_POSITION_RIGHT);
+                    return BOUNDS_POSITION_RIGHT;
+                }
+            }
+        }
+        return NO_CUTOUT;
     }
 }
