@@ -5035,6 +5035,11 @@ public final class Settings {
         public static final String NOTIFICATION_HEADERS = "notification_headers";
 
         /**
+          * @hide
+          */
+        public static final String GAMING_MODE_USE_OVERLAY_MENU = "gaming_mode_use_overlay_menu";
+
+        /**
          * These are all public system settings
          *
          * @hide
