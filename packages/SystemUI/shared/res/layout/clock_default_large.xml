@@ -26,6 +26,7 @@
     android:fontFamily="@*android:string/config_clockFontFamily"
     android:typeface="monospace"
     android:elegantTextHeight="false"
+    android:fontFeatureSettings="tnum, cv03, cv04"
     chargeAnimationDelay="200"
     dozeWeight="200"
     lockScreenWeight="400" />
