@@ -62,6 +62,7 @@ import com.android.systemui.statusbar.DisableFlagsLogger;
 import com.android.systemui.statusbar.VibratorHelper;
 import com.android.systemui.statusbar.notification.stack.NotificationStackScrollLayoutController;
 import com.android.systemui.statusbar.phone.dagger.CentralSurfacesComponent;
+import com.android.systemui.statusbar.policy.FlashlightController;
 import com.android.systemui.statusbar.policy.DeviceProvisionedController;
 import com.android.systemui.statusbar.policy.FlashlightController;
 import com.android.systemui.statusbar.policy.HeadsUpManager;
@@ -95,6 +96,8 @@ public class CentralSurfacesCommandQueueCallbacks implements CommandQueue.Callba
     private final PowerManager mPowerManager;
     private final VibratorHelper mVibratorHelper;
     private final Optional<Vibrator> mVibratorOptional;
+    private final LightBarController mLightBarController;
+    private final FlashlightController mFlashlightController;
     private final DisableFlagsLogger mDisableFlagsLogger;
     private final int mDisplayId;
     private final FlashlightController mFlashlightController;
@@ -128,6 +131,8 @@ public class CentralSurfacesCommandQueueCallbacks implements CommandQueue.Callba
             PowerManager powerManager,
             VibratorHelper vibratorHelper,
             Optional<Vibrator> vibratorOptional,
+            LightBarController lightBarController,
+            FlashlightController flashlightController,
             DisableFlagsLogger disableFlagsLogger,
             @DisplayId int displayId,
             SystemBarAttributesListener systemBarAttributesListener,
@@ -153,6 +158,8 @@ public class CentralSurfacesCommandQueueCallbacks implements CommandQueue.Callba
         mPowerManager = powerManager;
         mVibratorHelper = vibratorHelper;
         mVibratorOptional = vibratorOptional;
+        mLightBarController = lightBarController;
+        mFlashlightController = flashlightController;
         mDisableFlagsLogger = disableFlagsLogger;
         mDisplayId = displayId;
         mFlashlightController = flashlightController;
