@@ -51,4 +51,7 @@
     <java-symbol type="integer" name="config_longPressOnAppSwitchKeyBehavior" />
     <java-symbol type="integer" name="config_longPressOnCameraKeyBehavior" />
 
+    <!-- Whether device supports an alt. ambient display -->
+    <java-symbol type="bool" name="config_alt_ambient_display"/>
+
 </resources>
