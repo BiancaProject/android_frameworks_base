@@ -147,7 +147,7 @@ final class ActivityManagerConstants extends ContentObserver {
     private static final long DEFAULT_TOP_TO_FGS_GRACE_DURATION = 15 * 1000;
     private static final int DEFAULT_PENDINGINTENT_WARNING_THRESHOLD = 2000;
     private static final int DEFAULT_MIN_CRASH_INTERVAL = 2 * 60 * 1000;
-    private static final int DEFAULT_MAX_PHANTOM_PROCESSES = 32;
+    private static final int DEFAULT_MAX_PHANTOM_PROCESSES = 256;
     private static final int DEFAULT_PROCESS_CRASH_COUNT_RESET_INTERVAL = 12 * 60 * 60 * 1000;
     private static final int DEFAULT_PROCESS_CRASH_COUNT_LIMIT = 12;
     private static final int DEFAULT_BOOT_TIME_TEMP_ALLOWLIST_DURATION = 20 * 1000;
