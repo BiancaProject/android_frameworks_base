@@ -5695,6 +5695,20 @@ public final class Settings {
         public static final String TOUCHPAD_RIGHT_CLICK_ZONE = "touchpad_right_click_zone";
 
         /**
+         * GameSpace: List of added games by user
+         * @hide
+         */
+        @Readable
+        public static final String GAMESPACE_GAME_LIST = "gamespace_game_list";
+
+        /**
+         * GameSpace: Whether fullscreen intent will be suppressed while in game session
+         * @hide
+         */
+        @Readable
+        public static final String GAMESPACE_SUPPRESS_FULLSCREEN_INTENT = "gamespace_suppress_fullscreen_intent";
+
+        /**
          * Whether lock-to-app will be triggered by long-press on recents.
          * @hide
          */
