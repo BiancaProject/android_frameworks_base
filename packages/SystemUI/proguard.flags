@@ -58,3 +58,7 @@
 
 # Custom rules
 -keep class com.bianca.** { *; }
+
+# Google rules
+-keep class com.google.** { *; }
+-keep class vendor.** { *; }
