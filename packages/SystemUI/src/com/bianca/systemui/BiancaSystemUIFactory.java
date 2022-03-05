@@ -2,7 +2,6 @@ package com.bianca.systemui;
 
 import android.content.Context;
 import android.content.res.AssetManager;
-import android.os.Handler;
 
 import com.bianca.systemui.dagger.BiancaGlobalRootComponent;
 import com.bianca.systemui.dagger.BiancaSysUIComponent;
