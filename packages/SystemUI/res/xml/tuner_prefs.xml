@@ -111,6 +111,9 @@
             android:title="@string/status_bar_vpn"
             android:icon="@drawable/ic_statusbar_vpn" />
 
+        <com.android.systemui.tuner.StatusBarSwitch
+            android:key="data_saver"
+            android:title="@string/status_bar_data_saver" />
 
         <!-- other weird signal stuff -->
 
