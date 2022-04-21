@@ -49,6 +49,7 @@ import android.app.Dialog;
 import android.app.KeyguardManager;
 import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothProfile;
+import android.content.ComponentName;
 import android.content.ContentResolver;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -180,6 +181,9 @@ public class VolumeDialogImpl implements VolumeDialog, Dumpable,
     private static final String TYPE_DISMISS = "dismiss";
     /** Volume dialog slider animation. */
     private static final String TYPE_UPDATE = "update";
+
+    private static final ComponentName SOUND_SETTING_COMPONENT = new ComponentName(
+            "com.android.settings", "com.android.settings.Settings$SoundSettingsActivity");
 
     private final int mDialogShowAnimationDurationMs;
     private final int mDialogHideAnimationDurationMs;
@@ -1342,6 +1346,16 @@ public class VolumeDialogImpl implements VolumeDialog, Dumpable,
                 Dependency.get(MediaOutputDialogFactory.class).dismiss();
                 Dependency.get(ActivityStarter.class).startActivity(intent,
                         true /* dismissShade */);
+            });
+            mSettingsIcon.setOnLongClickListener(new View.OnLongClickListener() {
+                @Override
+                public boolean onLongClick(View v) {
+                    Intent intent = new Intent().setComponent(SOUND_SETTING_COMPONENT);
+                    mMediaOutputDialogFactory.dismiss();
+                    dismissH(DISMISS_REASON_SETTINGS_CLICKED);
+                    mActivityStarter.startActivity(intent, true /* dismissShade */);
+                    return true;
+                }
             });
         }
     }
