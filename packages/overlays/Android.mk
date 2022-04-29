@@ -31,11 +31,11 @@ LOCAL_REQUIRED_MODULES := \
 	IconPackCircularSettingsOverlay \
 	IconPackCircularSystemUIOverlay \
 	IconPackCircularThemePickerOverlay \
-        IconPackPUIAndroidOverlay \
-        IconPackPUILauncherOverlay \
-        IconPackPUISettingsOverlay \
-        IconPackPUISystemUIOverlay \
-        IconPackPUIThemePickerOverlay \
+	IconPackPUIAndroidOverlay \
+	IconPackPUILauncherOverlay \
+	IconPackPUISettingsOverlay \
+	IconPackPUISystemUIOverlay \
+	IconPackPUIThemePickerOverlay \
 	IconPackVictorAndroidOverlay \
 	IconPackVictorLauncherOverlay \
 	IconPackVictorSettingsOverlay \
@@ -61,17 +61,21 @@ LOCAL_REQUIRED_MODULES := \
 	IconPackRoundedSettingsOverlay \
 	IconPackRoundedSystemUIOverlay \
 	IconPackRoundedThemePickerOverlay \
-    IconPackOOSAndroidOverlay \
-    IconPackOOSLauncherOverlay \
-    IconPackOOSSettingsOverlay \
-    IconPackOOSSystemUIOverlay \
-    IconPackOOSThemePickerOverlay \
-    IconPackAcherusAndroidOverlay \
-    IconPackAcherusSettingsOverlay \
-    IconPackAcherusSystemUIOverlay \
-    IconPackOutlineAndroidOverlay \
-    IconPackOutlineSettingsOverlay \
-    IconPackOutlineSystemUIOverlay \
+	IconPackOOSAndroidOverlay \
+	IconPackOOSLauncherOverlay \
+	IconPackOOSSettingsOverlay \
+	IconPackOOSSystemUIOverlay \
+	IconPackOOSThemePickerOverlay \
+	IconPackAcherusAndroidOverlay \
+	IconPackAcherusLauncherOverlay \
+	IconPackAcherusSettingsOverlay \
+	IconPackAcherusSystemUIOverlay \
+	IconPackAcherusThemePickerOverlay \
+	IconPackOutlineAndroidOverlay \
+	IconPackOutlineLauncherOverlay \
+	IconPackOutlineSettingsOverlay \
+	IconPackOutlineSystemUIOverlay \
+	IconPackOutlineThemePickerOverlay \
 	IconPackXperiaAndroidOverlay \
 	IconPackXperiaSettingsOverlay \
 	IconPackXperiaSystemUIOverlay \
