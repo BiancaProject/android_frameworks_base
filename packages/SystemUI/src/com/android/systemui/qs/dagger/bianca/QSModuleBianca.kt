@@ -17,6 +17,7 @@
 package com.android.systemui.qs.dagger.bianca
 
 import com.android.systemui.qs.tileimpl.QSTileImpl
+import com.android.systemui.qs.tiles.AutoBrightnessTile
 import com.android.systemui.qs.tiles.CaffeineTile
 import com.android.systemui.qs.tiles.DataSwitchTile
 import com.android.systemui.qs.tiles.HeadsUpTile
@@ -59,4 +60,10 @@ interface QSModuleBianca {
     @IntoMap
     @StringKey(SyncTile.TILE_SPEC)
     fun bindSyncTile(syncTile: SyncTile): QSTileImpl<*>
+
+    /** Inject AutoBrightnessTile into tileMap in QSModule */
+    @Binds
+    @IntoMap
+    @StringKey(AutoBrightnessTile.TILE_SPEC)
+    fun bindAutoBrightnessTile(autobrightnessTile: AutoBrightnessTile): QSTileImpl<*>
 }
