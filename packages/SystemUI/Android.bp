@@ -122,7 +122,6 @@ android_library {
         "lottie",
         "colorkt",
         "themelib",
-        "//hardware/google/interfaces:com.google.hardware.pixel.display-V3-java",
         "backgesture-google",
         "smartspace-google",
         "tensorflowlite_java",
