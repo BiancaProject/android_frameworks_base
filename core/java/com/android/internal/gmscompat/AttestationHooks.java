@@ -29,6 +29,7 @@ public final class AttestationHooks {
     private static final String TAG = "GmsCompat/Attestation";
 
     private static final String PROCESS_UNSTABLE = "com.google.android.gms.unstable";
+    private static final String PACKAGE_GMS = "com.google.android.gms"; // "Play services"
 
     private static final String PRODUCT_STOCK_FINGERPRINT =
             SystemProperties.get("ro.build.stock_fingerprint");
@@ -64,7 +65,7 @@ public final class AttestationHooks {
     }
 
     public static void initApplicationBeforeOnCreate(Application app) {
-        if (GmsInfo.PACKAGE_GMS.equals(app.getPackageName()) &&
+        if (PACKAGE_GMS.equals(app.getPackageName()) &&
                 PROCESS_UNSTABLE.equals(Application.getProcessName())) {
             sIsGms = true;
             spoofBuildGms();
