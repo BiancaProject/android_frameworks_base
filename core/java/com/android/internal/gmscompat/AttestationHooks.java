@@ -54,8 +54,9 @@ public final class AttestationHooks {
     }
 
     private static void spoofBuildGms() {
-        // Alter model name to avoid hardware attestation enforcement
-        setBuildField("MODEL", "Pixel 5a");
+        // Alter model name and fingerprint to avoid hardware attestation enforcement
+        setBuildField("FINGERPRINT", "google/angler/angler:6.0/MDB08L/2343525:user/release-keys");
+        setBuildField("MODEL", "Nexus 6P");
     }
 
     public static void initApplicationBeforeOnCreate(Application app) {
@@ -67,7 +68,6 @@ public final class AttestationHooks {
 
         if (PACKAGE_FINSKY.equals(app.getPackageName())) {
             sIsFinsky = true;
-            spoofBuildGms();
         }
     }
 
