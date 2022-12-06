@@ -247,6 +247,8 @@ object Flags {
 
     // 600- status bar
 
+    val COMBINED_STATUS_BAR_SIGNAL_ICONS = unreleasedFlag(601, false)
+
     // TODO(b/256614753): Tracking Bug
     val NEW_STATUS_BAR_MOBILE_ICONS = unreleasedFlag(606, "new_status_bar_mobile_icons")
 
