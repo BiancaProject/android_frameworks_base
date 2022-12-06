@@ -56,7 +56,7 @@ public final class AttestationHooks {
     private static void spoofBuildGms() {
         // Alter model name and fingerprint to avoid hardware attestation enforcement
         setBuildField("FINGERPRINT", "google/angler/angler:6.0/MDB08L/2343525:user/release-keys");
-        setBuildField("MODEL", "Nexus 6P");
+        setBuildField("MODEL", Build.MODEL + "\u200b");
     }
 
     public static void initApplicationBeforeOnCreate(Application app) {
