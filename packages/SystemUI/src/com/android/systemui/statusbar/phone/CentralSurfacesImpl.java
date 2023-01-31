@@ -609,6 +609,7 @@ public class CentralSurfacesImpl extends CoreStartable implements
         }
     }
 
+    private Handler mMainHandler;
     private final DelayableExecutor mMainExecutor;
 
     private int mInteractingWindows;

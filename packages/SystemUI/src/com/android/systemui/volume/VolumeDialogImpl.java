@@ -1220,6 +1220,12 @@ public class VolumeDialogImpl implements VolumeDialog,
                 == BluetoothProfile.STATE_CONNECTED;
     }
 
+    private boolean isMediaControllerAvailable() {
+        final MediaController mediaController = getActiveLocalMediaController();
+        return mediaController != null &&
+                !TextUtils.isEmpty(mediaController.getPackageName());
+    }
+
     private void initSettingsH(int lockTaskModeState) {
         if (mRoundedBorderBottom != null){
             mRoundedBorderBottom.setVisibility(!mDeviceProvisionedController.isCurrentUserSetup() ||
