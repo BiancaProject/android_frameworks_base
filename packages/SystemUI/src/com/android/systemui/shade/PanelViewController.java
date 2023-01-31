@@ -204,8 +204,6 @@ public abstract class PanelViewController {
 
     protected final ShadeLogger mShadeLog;
 
-    protected boolean mIsSbDoubleTapEnabled;
-
     protected abstract void onExpandingFinished();
 
     protected void onExpandingStarted() {
