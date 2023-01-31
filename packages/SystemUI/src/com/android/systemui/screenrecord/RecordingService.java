@@ -255,23 +255,6 @@ public class RecordingService extends Service implements ScreenMediaRecorderList
                 mNotificationManager.cancelAsUser(null, NOTIFICATION_VIEW_ID, currentUser);
                 Log.d(TAG, "Deleted recording " + uri);
                 break;
-            case ACTION_DELETE:
-                // Close quick shade
-                sendBroadcast(new Intent(Intent.ACTION_CLOSE_SYSTEM_DIALOGS));
-
-                ContentResolver resolver = getContentResolver();
-                Uri uri = Uri.parse(intent.getStringExtra(EXTRA_PATH));
-                resolver.delete(uri, null, null);
-
-                Toast.makeText(
-                        this,
-                        R.string.screenrecord_delete_description,
-                        Toast.LENGTH_LONG).show();
-
-                // Remove notification
-                mNotificationManager.cancelAsUser(null, NOTIFICATION_VIEW_ID, currentUser);
-                Log.d(TAG, "Deleted recording " + uri);
-                break;
         }
         return Service.START_STICKY;
     }

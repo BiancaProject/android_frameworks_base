@@ -100,7 +100,6 @@ public class CentralSurfacesCommandQueueCallbacks implements CommandQueue.Callba
     private final FlashlightController mFlashlightController;
     private final DisableFlagsLogger mDisableFlagsLogger;
     private final int mDisplayId;
-    private final FlashlightController mFlashlightController;
     private final boolean mVibrateOnOpening;
     private final VibrationEffect mCameraLaunchGestureVibrationEffect;
     private final SystemBarAttributesListener mSystemBarAttributesListener;
@@ -135,8 +134,7 @@ public class CentralSurfacesCommandQueueCallbacks implements CommandQueue.Callba
             FlashlightController flashlightController,
             DisableFlagsLogger disableFlagsLogger,
             @DisplayId int displayId,
-            SystemBarAttributesListener systemBarAttributesListener,
-            FlashlightController flashlightController) {
+            SystemBarAttributesListener systemBarAttributesListener) {
 
         mCentralSurfaces = centralSurfaces;
         mContext = context;
@@ -162,7 +160,6 @@ public class CentralSurfacesCommandQueueCallbacks implements CommandQueue.Callba
         mFlashlightController = flashlightController;
         mDisableFlagsLogger = disableFlagsLogger;
         mDisplayId = displayId;
-        mFlashlightController = flashlightController;
 
         mVibrateOnOpening = resources.getBoolean(R.bool.config_vibrateOnIconAnimation);
         mCameraLaunchGestureVibrationEffect = getCameraGestureVibrationEffect(
