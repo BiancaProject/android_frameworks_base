@@ -64,7 +64,7 @@ import java.util.function.Supplier;
 /**
  * An AsyncTask that saves an image to the media store in the background.
  */
-class SaveImageInBackgroundTask extends AsyncTask<String, Void, Void> {
+class SaveImageInBackgroundTask extends AsyncTask<Void, Void, Void> {
     private static final String TAG = logTag(SaveImageInBackgroundTask.class);
 
     private static final String SCREENSHOT_ID_TEMPLATE = "Screenshot_%s";
@@ -108,7 +108,7 @@ class SaveImageInBackgroundTask extends AsyncTask<String, Void, Void> {
     }
 
     @Override
-    protected Void doInBackground(String... params) {
+    protected Void doInBackground(Void... paramsUnused) {
         if (isCancelled()) {
             if (DEBUG_STORAGE) {
                 Log.d(TAG, "cancelled! returning null");
@@ -133,8 +133,7 @@ class SaveImageInBackgroundTask extends AsyncTask<String, Void, Void> {
 
             // Call synchronously here since already on a background thread.
             ListenableFuture<ImageExporter.Result> future =
-                    mImageExporter.export(Runnable::run, requestId, image,
-                            params != null ? params[0] : null);
+                    mImageExporter.export(Runnable::run, requestId, image);
             ImageExporter.Result result = future.get();
             final Uri uri = result.uri;
             mImageTime = result.timestamp;
