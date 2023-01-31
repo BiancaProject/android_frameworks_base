@@ -310,13 +310,12 @@ public class ScreenshotController {
     };
 
     private String getForegroundAppLabel() {
-        if (mTaskComponentName != null) {
-            try {
-                final ActivityInfo ai = mPm.getActivityInfo(mTaskComponentName, 0);
-                return ai.applicationInfo.loadLabel(mPm).toString();
-            } catch (PackageManager.NameNotFoundException e) {}
+        try {
+            final ActivityInfo ai = mPm.getActivityInfo(mTaskComponentName, 0);
+            return ai.applicationInfo.loadLabel(mPm).toString();
+        } catch (PackageManager.NameNotFoundException e) {
+             return null;
         }
-        return null;
     }
 
     @Inject
