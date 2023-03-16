@@ -425,8 +425,7 @@ public class MobileSignalController extends SignalController<MobileState, Mobile
                 qsInfo.description,
                 mSubscriptionInfo.getSubscriptionId(),
                 mCurrentState.roaming,
-                sbInfo.showTriangle,
-                mCurrentState.isDefault);
+                sbInfo.showTriangle);
         callback.setMobileDataIndicators(mobileDataIndicators);
     }
 
@@ -436,7 +435,8 @@ public class MobileSignalController extends SignalController<MobileState, Mobile
         CharSequence qsDescription = null;
 
         if (mCurrentState.dataSim) {
-            if (mProviderModelBehavior) {
+            // If using provider model behavior, only show QS icons if the state is also default
+            if (!mCurrentState.isDefault) {
                 return new QsInfo(qsTypeIcon, qsIcon, qsDescription);
             }
 
