@@ -90,7 +90,6 @@ public class NetworkControllerSignalTest extends NetworkControllerBaseTest {
                 mWifiStatusTrackerFactory,
                 mMobileFactory,
                 mMainHandler,
-                mFeatureFlags,
                 mock(DumpManager.class),
                 mock(LogBuffer.class)
         );
@@ -129,7 +128,6 @@ public class NetworkControllerSignalTest extends NetworkControllerBaseTest {
                 mWifiStatusTrackerFactory,
                 mMobileFactory,
                 mMainHandler,
-                mFeatureFlags,
                 mock(DumpManager.class),
                 mock(LogBuffer.class));
         TestableLooper.get(this).processAllMessages();
@@ -166,7 +164,6 @@ public class NetworkControllerSignalTest extends NetworkControllerBaseTest {
                 mWifiStatusTrackerFactory,
                 mMobileFactory,
                 mMainHandler,
-                mFeatureFlags,
                 mock(DumpManager.class),
                 mock(LogBuffer.class));
         setupNetworkController();
@@ -206,7 +203,6 @@ public class NetworkControllerSignalTest extends NetworkControllerBaseTest {
                 mWifiStatusTrackerFactory,
                 mMobileFactory,
                 mMainHandler,
-                mFeatureFlags,
                 mock(DumpManager.class),
                 mock(LogBuffer.class));
         mNetworkController.registerListeners();
@@ -294,7 +290,6 @@ public class NetworkControllerSignalTest extends NetworkControllerBaseTest {
                 mWifiStatusTrackerFactory,
                 mMobileFactory,
                 mMainHandler,
-                mFeatureFlags,
                 mock(DumpManager.class),
                 mock(LogBuffer.class));
         setupNetworkController();
