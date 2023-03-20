@@ -67,7 +67,7 @@ public class AutoBrightnessTile extends QSTileImpl<BooleanState> {
 
     public static final String TILE_SPEC = "autobrightness";
 
-    private static final Intent DISPLAY_SETTINGS = new Intent("android.settings.DISPLAY_SETTINGS");
+    private static final Intent ADAPTIVE_BRIGHTNESS_SETTINGS = new Intent("android.settings.ADAPTIVE_BRIGHTNESS_SETTINGS");
 
     private final Icon mIcon = ResourceIcon.get(R.drawable.ic_qs_autobrightness);
 
@@ -98,7 +98,7 @@ public class AutoBrightnessTile extends QSTileImpl<BooleanState> {
 
     @Override
     public Intent getLongClickIntent() {
-        return DISPLAY_SETTINGS;
+        return ADAPTIVE_BRIGHTNESS_SETTINGS;
     }
 
     @Override
