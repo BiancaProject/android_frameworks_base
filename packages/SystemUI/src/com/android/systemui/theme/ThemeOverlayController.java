@@ -391,6 +391,7 @@ public class ThemeOverlayController implements CoreStartable, Dumpable {
             SecureSettings secureSettings,
             WallpaperManager wallpaperManager,
             UserManager userManager,
+            ConfigurationController configurationController,
             DeviceProvisionedController deviceProvisionedController,
             UserTracker userTracker,
             DumpManager dumpManager,
