@@ -3403,8 +3403,11 @@ public class Notification implements Parcelable
      *
      * @hide
      */
-    public void setAllowlistToken(@Nullable IBinder token) {
-        mAllowlistToken = token;
+    public void clearAllowlistToken() {
+        mAllowlistToken = null;
+        if (publicVersion != null) {
+            publicVersion.clearAllowlistToken();
+        }
     }
 
     /**
