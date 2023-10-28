@@ -110,7 +110,6 @@ import com.android.server.appbinding.AppBindingService;
 import com.android.server.art.ArtManagerLocal;
 import com.android.server.attention.AttentionManagerService;
 import com.android.server.audio.AudioService;
-import com.android.server.bianca.BiancaDeviceConfigService;
 import com.android.server.biometrics.AuthService;
 import com.android.server.biometrics.BiometricService;
 import com.android.server.biometrics.sensors.face.FaceService;
@@ -2518,11 +2517,6 @@ public final class SystemServer implements Dumpable {
 
             t.traceBegin("StartMediaMetricsManager");
             mSystemServiceManager.startService(MediaMetricsManagerService.class);
-            t.traceEnd();
-
-            // BiancaDeviceConfigService
-            t.traceBegin("StartBiancaDeviceConfigService");
-            mSystemServiceManager.startService(BiancaDeviceConfigService.class);
             t.traceEnd();
         }
 
