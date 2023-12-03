@@ -38,9 +38,6 @@
     <!-- Whether usage of the proximity sensor during doze is supported -->
     <bool name="doze_proximity_sensor_supported">true</bool>
 
-    <!-- Unlock ripple animation -->
-    <bool name="config_enableUnlockRippleAnimation">true</bool>
-
     <!-- If not zero, limits the internal screen recorder's framerate to the set value. -->
     <integer name="config_screenRecorderMaxFramerate">0</integer>
 
@@ -61,6 +58,5 @@
     <integer name="qs_panel_num_columns">2</integer>
     <integer name="qs_panel_num_columns_landscape">4</integer>
     <integer name="qs_panel_num_columns_media">2</integer>
-
 
 </resources>
