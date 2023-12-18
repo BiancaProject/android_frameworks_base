@@ -38,6 +38,7 @@ import com.android.internal.logging.MetricsLogger;
 import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.systemui.dagger.qualifiers.Background;
 import com.android.systemui.dagger.qualifiers.Main;
+import com.android.systemui.qs.QsEventLogger;
 import com.android.systemui.qs.QSHost;
 import com.android.systemui.qs.logging.QSLogger;
 import com.android.systemui.qs.tileimpl.QSTileImpl;
@@ -74,7 +75,9 @@ public class UsbTetherTile extends QSTileImpl<BooleanState> {
     private boolean mUsbTetherEnabled = false;
 
     @Inject
-    public UsbTetherTile(QSHost host,
+    public UsbTetherTile(
+            QSHost host,
+            QsEventLogger uiEventLogger,
             @Background Looper backgroundLooper,
             @Main Handler mainHandler,
             FalsingManager falsingManager,
@@ -83,7 +86,7 @@ public class UsbTetherTile extends QSTileImpl<BooleanState> {
             ActivityStarter activityStarter,
             QSLogger qsLogger
     ) {
-        super(host, backgroundLooper, mainHandler, falsingManager, metricsLogger,
+        super(host, uiEventLogger, backgroundLooper, mainHandler, falsingManager, metricsLogger,
                 statusBarStateController, activityStarter, qsLogger);
         mTetheringManager = mContext.getSystemService(TetheringManager.class);
         mOnStartTetheringCallback = new OnStartTetheringCallback();
