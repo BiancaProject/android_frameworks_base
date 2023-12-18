@@ -27,6 +27,7 @@ import com.android.internal.logging.MetricsLogger;
 import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.systemui.R;
 import com.android.systemui.plugins.qs.QSTile.BooleanState;
+import com.android.systemui.qs.QsEventLogger;
 import com.android.systemui.qs.QSHost;
 import com.android.systemui.qs.tileimpl.QSTileImpl;
 
@@ -43,6 +44,7 @@ import com.android.systemui.plugins.ActivityStarter;
 import com.android.systemui.plugins.FalsingManager;
 import com.android.systemui.plugins.statusbar.StatusBarStateController;
 import com.android.systemui.qs.logging.QSLogger;
+import com.android.systemui.qs.pipeline.domain.interactor.PanelInteractor;
 import com.android.systemui.statusbar.policy.KeyguardStateController;
 
 import javax.inject.Inject;
@@ -52,9 +54,12 @@ public class RebootTile extends SecureQSTile<BooleanState> {
     public static final String TILE_SPEC = "reboot";
 
     private int mRebootToRecovery = 0;
+    private final PanelInteractor mPanelInteractor;
 
     @Inject
-    public RebootTile(            QSHost host,
+    public RebootTile(
+            QSHost host,
+            QsEventLogger uiEventLogger,
             @Background Looper backgroundLooper,
             @Main Handler mainHandler,
             FalsingManager falsingManager,
@@ -62,10 +67,13 @@ public class RebootTile extends SecureQSTile<BooleanState> {
             StatusBarStateController statusBarStateController,
             ActivityStarter activityStarter,
             QSLogger qsLogger,
-            KeyguardStateController keyguardStateController
+            KeyguardStateController keyguardStateController,
+            PanelInteractor panelInteractor
     ) {
-        super(host, backgroundLooper, mainHandler, falsingManager, metricsLogger,
+        super(host, uiEventLogger, backgroundLooper, mainHandler, falsingManager, metricsLogger,
                 statusBarStateController, activityStarter, qsLogger, keyguardStateController);
+
+        mPanelInteractor = panelInteractor;
     }
 
     @Override
@@ -97,7 +105,7 @@ public class RebootTile extends SecureQSTile<BooleanState> {
 
     @Override
     protected void handleLongClick(@Nullable View view) {
-        mHost.collapsePanels();
+        mPanelInteractor.collapsePanels();
         Handler handler = new Handler();
         handler.postDelayed(new Runnable() {
             public void run() {
