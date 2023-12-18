@@ -2378,7 +2378,7 @@ public class PhoneWindowManager implements WindowManagerPolicy {
         };
         filter = new IntentFilter();
         filter.addAction(ACTION_TORCH_OFF);
-        context.registerReceiver(torchReceiver, filter);
+        mContext.registerReceiver(torchReceiver, filter);
     }
 
     private void initKeyCombinationRules() {
